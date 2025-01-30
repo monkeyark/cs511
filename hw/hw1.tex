@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,epic,epsfig,latexsym,enumerate}
+\usepackage{enumitem}
+\usepackage[titlenotnumbered,linesnumbered,noend,plain]{algorithm2e} 
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\newtheorem{lemma}{Lemma}
+\usepackage{url}
+\SetKwProg{Fn}{}{}{}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\date{}
+
+\begin{document}
+
+\begin{center}
+  \textbf{COMS 5110: Assignment 1}\\
+  \textbf{Due: Feb $10^{th}$, 11:59pm}\\
+  \textbf{Total Points: 50}
+\end{center}
+
+
+\paragraph{Late submission policy.\ }
+Any assignment submission that is late by not more than two business days from the deadline will be accepted with 20\% penalty for each business day. That is, if a homework is due on Friday at 11:59 PM, then a Monday submission gets 20\% penalty and a Tuesday submission gets another 20\% penalty.  After Tuesday no late submissions are accepted.
+
+\paragraph{Submission format.\ }
+Homework solutions will have to be typed. You can use word, LaTeX, or any other type-setting tool to type your solution. Your submission file should be in pdf format. Do \textbf{NOT} submit a photocopy of handwritten homework except for diagrams that can be hand-drawn and scanned. We reserve the right \textbf{NOT} to grade homework that does not follow the formatting requirements.
+Name your submission
+file: \texttt{<Your-net-id>-5110-hw1.pdf}. For instance, if your netid
+is \texttt{asterix}, then your submission file will be named
+\texttt{asterix-5110-hw1.pdf}.
+Each student must hand in their own assignment. If you discussed the homework or solutions with others, a list of collaborators must be included with each submission. Each of the collaborators has to write the solutions in their own words (copies are not allowed).
+
+\paragraph{General Requirements}
+\begin{itemize}
+    \item When proofs are required, do your best to make them both clear and rigorous.
+    \item Even when proofs are not required, you should justify your answers and explain your work.
+   % \item When asked to present a construction, you should show the correctness of the construction.
+\end{itemize}
+
+\paragraph{Some Useful (in)equalities}
+\begin{itemize}
+    \item $\sum_{i=1}^n i= \frac{n(n+1)}{2}$
+    \item $\sum_{i=1}^ni^2 = \frac{n(n+1)(2n+1)}{6}$
+    \item $2^{\log_2n}=n$, $a^{\log_bn}=n^{\log_ba}$, $n^{n/2}\leq n! \leq n^n$, $\log x^a = a\log x$
+    \item $\log (a\times b) = \log a + \log b$, $\log(a/b) = \log a - \log b$
+    \item $a + ar + ar^2 + ... + ar^{n-1} = \frac{a(r^n-1)}{r-1}$
+    \item $1 + \frac{1}{2} + \frac{1}{2^2} + ... + \frac{1}{2^n} = 2(1-\frac{1}{2^{n+1}})$
+    \item $1 + 2 + 4 + ... + 2^n = 2^{n+1}-1$
+\end{itemize}
+
+\hrule
+
+\subsection*{Problem 1} (10 pints) {\bf Model of Computation} 
+Consider the following algorithm (written in pseudocode):
+\smallskip
+
+\begin{algorithm}[H]
+\Fn(){Alg(A, n)}{
+\KwIn{Array A[1 .. n] of positive integers each taking 50 bits of memory}
+\SetAlgoLined
+\SetNoFillComment
+\DontPrintSemicolon
+$min = 0$ \\
+$prod = 1$ \\
+\For{$i = 1$ to $n$}{
+$prod = 2 * prod$ \\
+\eIf{$prod > A[i]$}{
+$min = A[i]$ \\
+}{
+$min = prod$ \\
+}
+}
+}
+\end{algorithm}
+
+
+
+\smallskip
+In the {\em Random-Access Machine (RAM)} model, each word has $c \log_2 n$ bits for some constant $c \geq 1$ so that each word can hold the value of $n$. Determine if the results stored in $prod$ and $min$ in the above algorithm each fit into a word in the RAM model. You need to justify your answer by following the definition of the big O notation in your proof. Let $p(n)$ and $m(n)$ be the results saved in $prod$ and $min$, respectively, at the end of the algorithm. The function $p(n)$ fits into a word in the RAM model if $p(n)$ is in $O(\log_2 n)$; $p(n)$ does not fit into a word in the RAM model if $p(n)$ is not in $O(\log_2 n)$.
+
+\subsection*{Problem 2} (10 pints) {\bf Mathematical Induction} 
+Show by induction that $8 \log_2 n \leq n$ for all $n \geq n_0$ for some $n_0  > 0$.
+
+\subsection*{Problem 3} (10 pints) {\bf Sizes of Left and Right Subarrays in Merge Sort}
+Let $A[p .. r]$ be a subarray of $A[1 .. n]$ with $1 \leq p < r \leq n$. In the recursive algorithm MERGE-SORT$(A, p , r)$, the subarray $A[p .. r]$ is partitioned into left and right subarrays $A[p .. q]$ and $A[q+1 .. r]$ with $q = \floor*{(p+r)/2}$. Let $m = r - p + 1$ be the size of the subarray $A[p .. r]$. Show that the size of $A[p .. q]$ is $q- p + 1 = \ceil*{\frac{m}{2}}$, and that the size of $A[q+1 .. r]$ is $r - (q+1) + 1 = \floor*{\frac{m}{2}}$. You just need to prove it for the case where $p+r$ is odd, that is, $p + r = 2 y + 1$ for some integer $y$.
+
+\subsection*{Problem 4} (20 points) {\bf Solving recurrence by induction} 
+Use mathematical induction to show that $T(n) \leq c n - b \log_2 n - a$ for all $n \geq n_0$ for some constants $n_0 > 0$, $c > 0$, $b > 0$ and $a > 0$, where $T(n)$ is defined in the following recurrence:
+
+$T(1) = d$,
+
+$T(n) = T( \ceil*{\frac{n}{2}} ) + T( \floor*{\frac{n}{2}} ) + d \log_2 n$ if $n > 1$, where $d$ is a positive constant.
+
+\end{document}
