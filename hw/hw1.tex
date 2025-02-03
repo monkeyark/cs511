@@ -84,7 +84,7 @@ $min = prod$ \\
 
 
 \smallskip
-In the {\em Random-Access Machine (RAM)} model, each word has $c \log_2 n$ bits for some constant $c \geq 1$ so that each word can hold the value of $n$. Determine if the results stored in $prod$ and $min$ in the above algorithm each fit into a word in the RAM model. You need to justify your answer by following the definition of the big O notation in your proof. Let $p(n)$ and $m(n)$ be the results saved in $prod$ and $min$, respectively, at the end of the algorithm. The function $p(n)$ fits into a word in the RAM model if $p(n)$ is in $O(\log_2 n)$; $p(n)$ does not fit into a word in the RAM model if $p(n)$ is not in $O(\log_2 n)$.
+In the {\em Random-Access Machine (RAM)} model, each word has $c \log_2 n$ bits for some constant $c \geq 1$ so that each word can hold the value of $n$. Determine if the results stored in $prod$ and $min$ in the above algorithm each fit into a word in the RAM model. You need to justify your answer by following the definition of the big O notation in your proof. Let $p(n)$ and $m(n)$ be the results saved in $prod$ and $min$, respectively, at the end of the algorithm. The function $p(n)$ fits into a word in the RAM model if the number of bits used to save $p(n)$ is in $O(\log_2 n)$; $p(n)$ does not fit into a word in the RAM model if the number of bits used to save $p(n)$ is not in $O(\log_2 n)$.
 
 \subsection*{Problem 2} (10 pints) {\bf Mathematical Induction} 
 Show by induction that $8 \log_2 n \leq n$ for all $n \geq n_0$ for some $n_0  > 0$.
